@@ -193,7 +193,7 @@ int main(void)
 			sprintf((char *)&text,"Time: %02d %02d", stimestructureget.Hours, stimestructureget.Minutes);
 		LCD_ShowString(4, 58, 160, 16, 16, text);
 		
-		sprintf((char *)&text,"Tick: %lu ms",HAL_GetTick());
+		sprintf((char *)&text,"Tick: %d ms",HAL_GetTick());
 		LCD_ShowString(4, 74, 160, 16, 16,text);
 		
 		LED_Blink(3,500);
