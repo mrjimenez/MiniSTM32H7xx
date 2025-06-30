@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 spelling_locale_initialized=true
+spelling_user_dictionary=/home/mroberto/mrj/stm32/weact_studio/MiniSTM32H7xx/SDK/HAL/STM32H743/userdict.txt
+spelling_user_dictionary_encoding=
 useAnnotationsPrefPage=true
 useQuickDiffPrefPage=true
