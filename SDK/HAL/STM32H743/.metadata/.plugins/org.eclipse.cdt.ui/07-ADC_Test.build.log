@@ -1,10 +1,17 @@
-20:02:36 **** Incremental Build of configuration Debug for project 07-ADC_Test ****
+20:13:27 **** Incremental Build of configuration Debug for project 07-ADC_Test ****
 make -j24 all 
+arm-none-eabi-gcc "../Drivers/BSP/ST7735/lcd.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H743xx -DTFT96 -c -I../Core/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -I"/home/mroberto/mrj/stm32/weact_studio/MiniSTM32H7xx/SDK/HAL/STM32H743/07-ADC_Test/Drivers/BSP/ST7735" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/BSP/ST7735/lcd.d" -MT"Drivers/BSP/ST7735/lcd.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Drivers/BSP/ST7735/lcd.o"
+arm-none-eabi-gcc -o "07-ADC_Test.elf" @"objects.list"   -mcpu=cortex-m7 -T"/home/mroberto/mrj/stm32/weact_studio/MiniSTM32H7xx/SDK/HAL/STM32H743/07-ADC_Test/STM32H743VITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="07-ADC_Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 07-ADC_Test.elf
+ 
 arm-none-eabi-size  07-ADC_Test.elf 
+arm-none-eabi-objdump -h -S 07-ADC_Test.elf  > "07-ADC_Test.list"
    text	   data	    bss	    dec	    hex	filename
-  73576	    240	   3616	  77432	  12e78	07-ADC_Test.elf
+  73624	    240	   3616	  77480	  12ea8	07-ADC_Test.elf
 Finished building: default.size.stdout
  
+Finished building: 07-ADC_Test.list
+ 
 
-20:02:36 Build Finished. 0 errors, 0 warnings. (took 145ms)
+20:13:27 Build Finished. 0 errors, 0 warnings. (took 403ms)
 
