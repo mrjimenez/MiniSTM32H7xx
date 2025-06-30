@@ -3,7 +3,7 @@
 #include "spi.h"
 #include "tim.h"
 
-//SPIÏÔÊ¾ÆÁ½Ó¿Ú
+//SPIï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ó¿ï¿½
 //LCD_RST
 #define LCD_RST_SET     
 #define LCD_RST_RESET  
@@ -32,7 +32,7 @@ static int32_t lcd_recvdata(uint8_t* pdata,uint32_t length);
 ST7735_IO_t st7735_pIO = {
 	lcd_init,
 	NULL,
-	NULL,
+	0,
 	lcd_writereg,
 	lcd_readreg,
 	lcd_senddata,
@@ -83,7 +83,7 @@ void LCD_Test(void)
 			LCD_SetBrightness((get_tick() - tick) * 100 / 1000);
 		else if (get_tick() - tick <= 3000)
 		{
-			sprintf((char *)&text, "%03d", (get_tick() - tick - 1000) / 10);
+			sprintf((char *)&text, "%03lu", (get_tick() - tick - 1000) / 10);
 			LCD_ShowString(ST7735Ctx.Width - 30, 1, ST7735Ctx.Width, 16, 16, text);
 			ST7735_LCD_Driver.FillRect(&st7735_pObj, 0, ST7735Ctx.Height - 3, (get_tick() - tick - 1000) * ST7735Ctx.Width / 2000, 3, 0xFFFF);
 		}
@@ -100,7 +100,7 @@ void LCD_Test(void)
 
 	sprintf((char *)&text, "WeAct Studio");
 	LCD_ShowString(4, 4, ST7735Ctx.Width, 16, 16, text);
-	sprintf((char *)&text, "STM32H7xx 0x%X", HAL_GetDEVID());
+	sprintf((char *)&text, "STM32H7xx 0x%lX", HAL_GetDEVID());
 	LCD_ShowString(4, 22, ST7735Ctx.Width, 16, 16, text);
 //	sprintf((char *)&text, "LCD ID:0x%X", st7735_id);
 //	LCD_ShowString(4, 40, ST7735Ctx.Width, 16, 16, text);
@@ -119,9 +119,9 @@ uint32_t LCD_GetBrightness(void)
 }
 
 
-// ÆÁÄ»Öð½¥±äÁÁ»òÕß±ä°µ
-// Brightness_Dis: Ä¿±êÖµ
-// time: ´ïµ½Ä¿±êÖµµÄÊ±¼ä,µ¥Î»: ms
+// ï¿½ï¿½Ä»ï¿½ð½¥±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß±ä°µ
+// Brightness_Dis: Ä¿ï¿½ï¿½Öµ
+// time: ï¿½ïµ½Ä¿ï¿½ï¿½Öµï¿½ï¿½Ê±ï¿½ï¿½,ï¿½ï¿½Î»: ms
 void LCD_Light(uint32_t Brightness_Dis,uint32_t time)
 {
 	uint32_t Brightness_Now;
@@ -162,13 +162,13 @@ void LCD_Light(uint32_t Brightness_Dis,uint32_t time)
 	}
 }
 	
-uint16_t POINT_COLOR=0xFFFF;	//»­±ÊÑÕÉ«
-uint16_t BACK_COLOR=BLACK;  //±³¾°É« 
-//ÔÚÖ¸¶¨Î»ÖÃÏÔÊ¾Ò»¸ö×Ö·û
-//x,y:ÆðÊ¼×ø±ê
-//num:ÒªÏÔÊ¾µÄ×Ö·û:" "--->"~"
-//size:×ÖÌå´óÐ¡ 12/16
-//mode:µþ¼Ó·½Ê½(1)»¹ÊÇ·Çµþ¼Ó·½Ê½(0)  
+uint16_t POINT_COLOR=0xFFFF;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
+uint16_t BACK_COLOR=BLACK;  //ï¿½ï¿½ï¿½ï¿½É« 
+//ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½Ö·ï¿½
+//x,y:ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+//num:Òªï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ö·ï¿½:" "--->"~"
+//size:ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ 12/16
+//mode:ï¿½ï¿½ï¿½Ó·ï¿½Ê½(1)ï¿½ï¿½ï¿½Ç·Çµï¿½ï¿½Ó·ï¿½Ê½(0)  
 
 void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 {  							  
@@ -184,16 +184,16 @@ void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
   ST7735_GetXSize(&st7735_pObj,&w);
 	ST7735_GetYSize(&st7735_pObj,&h);
 	
-	//ÉèÖÃ´°¿Ú		   
-	num=num-' ';//µÃµ½Æ«ÒÆºóµÄÖµ
+	//ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½		   
+	num=num-' ';//ï¿½Ãµï¿½Æ«ï¿½Æºï¿½ï¿½Öµ
 	count = 0;
 	
-	if(!mode) //·Çµþ¼Ó·½Ê½
+	if(!mode) //ï¿½Çµï¿½ï¿½Ó·ï¿½Ê½
 	{
 		for(t=0;t<size;t++)
 		{   
-			if(size==12)temp=asc2_1206[num][t];  //µ÷ÓÃ1206×ÖÌå
-			else temp=asc2_1608[num][t];		 //µ÷ÓÃ1608×ÖÌå
+			if(size==12)temp=asc2_1206[num][t];  //ï¿½ï¿½ï¿½ï¿½1206ï¿½ï¿½ï¿½ï¿½
+			else temp=asc2_1608[num][t];		 //ï¿½ï¿½ï¿½ï¿½1608ï¿½ï¿½ï¿½ï¿½
 			
 			for(t1=0;t1<8;t1++)
 			{			    
@@ -208,23 +208,23 @@ void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 				
 				temp<<=1;
 				y++;
-				if(y>=h){POINT_COLOR=colortemp;return;}//³¬ÇøÓòÁË
+				if(y>=h){POINT_COLOR=colortemp;return;}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if((y-y0)==size)
 				{
 					y=y0;
 					x++;
-					if(x>=w){POINT_COLOR=colortemp;return;}//³¬ÇøÓòÁË
+					if(x>=w){POINT_COLOR=colortemp;return;}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
 				}
 			}
 		}
 	}
-	else//µþ¼Ó·½Ê½
+	else//ï¿½ï¿½ï¿½Ó·ï¿½Ê½
 	{
 		for(t=0;t<size;t++)
 		{   
-			if(size==12)temp=asc2_1206[num][t];  //µ÷ÓÃ1206×ÖÌå
-			else temp=asc2_1608[num][t];		 //µ÷ÓÃ1608×ÖÌå 	                          
+			if(size==12)temp=asc2_1206[num][t];  //ï¿½ï¿½ï¿½ï¿½1206ï¿½ï¿½ï¿½ï¿½
+			else temp=asc2_1608[num][t];		 //ï¿½ï¿½ï¿½ï¿½1608ï¿½ï¿½ï¿½ï¿½ 	                          
 			for(t1=0;t1<8;t1++)
 			{			    
 				if(temp&0x80)
@@ -234,12 +234,12 @@ void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 				
 				temp<<=1;
 				y++;
-				if(y>=h){POINT_COLOR=colortemp;return;}//³¬ÇøÓòÁË
+				if(y>=h){POINT_COLOR=colortemp;return;}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if((y-y0)==size)
 				{
 					y=y0;
 					x++;
-					if(x>=w){POINT_COLOR=colortemp;return;}//³¬ÇøÓòÁË
+					if(x>=w){POINT_COLOR=colortemp;return;}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					break;
 				}
 			}  	 
@@ -249,20 +249,20 @@ void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 	POINT_COLOR=colortemp;	    	   	 	  
 }   
 
-//ÏÔÊ¾×Ö·û´®
-//x,y:Æðµã×ø±ê
-//width,height:ÇøÓò´óÐ¡  
-//size:×ÖÌå´óÐ¡
-//*p:×Ö·û´®ÆðÊ¼µØÖ·
+//ï¿½ï¿½Ê¾ï¿½Ö·ï¿½ï¿½ï¿½
+//x,y:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//width,height:ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡  
+//size:ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡
+//*p:ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ö·
 void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t size,uint8_t *p)
 {         
 	uint8_t x0=x;
 	width+=x;
 	height+=y;
-    while((*p<='~')&&(*p>=' '))//ÅÐ¶ÏÊÇ²»ÊÇ·Ç·¨×Ö·û!
+    while((*p<='~')&&(*p>=' '))//ï¿½Ð¶ï¿½ï¿½Ç²ï¿½ï¿½Ç·Ç·ï¿½ï¿½Ö·ï¿½!
     {       
         if(x>=width){x=x0;y+=size;}
-        if(y>=height)break;//ÍË³ö
+        if(y>=height)break;//ï¿½Ë³ï¿½
         LCD_ShowChar(x,y,*p,size,0);
         x+=size/2;
         p++;

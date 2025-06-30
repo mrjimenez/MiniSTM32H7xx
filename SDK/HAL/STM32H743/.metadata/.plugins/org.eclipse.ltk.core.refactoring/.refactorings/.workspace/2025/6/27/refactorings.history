@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;07-ADC_Test/Core/Src/system_stm32h7xx.c&apos;" deleteContents="false" description="Delete resource &apos;07-ADC_Test/Core/Src/system_stm32h7xx.c&apos;" element1="/07-ADC_Test/Core/Src/system_stm32h7xx.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1751323692765"/>
+</session>

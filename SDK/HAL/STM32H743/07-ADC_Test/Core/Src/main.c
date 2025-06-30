@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "memorymap.h"
 #include "spi.h"
 #include "tim.h"
 #include "gpio.h"
@@ -123,6 +124,7 @@ void LED_Blink(uint32_t delay)
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   #ifdef W25Qxx
     SCB->VTOR = QSPI_BASE;
@@ -202,18 +204,18 @@ int main(void)
 		HAL_ADC_Stop(&hadc3);
 		
 		#define V30  (620)  // mV, V30: 0.62V,datasheet P278
-		#define Avg_Slope (2) // mV/¡ãC
+		#define Avg_Slope (2) // mV/ï¿½ï¿½C
 		
 		adc3_inp0  = uhADCxInputVoltage[0]; // mv
 		vrefint    = uhADCxInputVoltage[1]; // type. 1200mV
-		tempsensor = ((int32_t)uhADCxInputVoltage[2] - V30)/Avg_Slope + 30; // ¡ãC
+		tempsensor = ((int32_t)uhADCxInputVoltage[2] - V30)/Avg_Slope + 30; // ï¿½ï¿½C
 		vbat       = uhADCxInputVoltage[3] * 4; 
 		
-		uint8_t text[20];
+		uint8_t text[30];
 		#ifdef TFT96
-		sprintf((char *)&text, " PC2: %4dmV Vref: %4dmV", adc3_inp0, vrefint);
+		sprintf((char *)&text, " PC2: %4lumV Vref: %4lumV", adc3_inp0, vrefint);
 		LCD_ShowString(0, 46, ST7735Ctx.Width, 16, 12, text);
-		sprintf((char *)&text, "temp: %3d 'C vbat: %4dmV", tempsensor, vbat);
+		sprintf((char *)&text, "temp: %3lu 'C vbat: %4lumV", tempsensor, vbat);
 		LCD_ShowString(0, 62, ST7735Ctx.Width,16,12,text);
 		#elif TFT18
 		sprintf((char *)&text, " PC2: %4dmV", adc3_inp0);
@@ -243,14 +245,13 @@ void SystemClock_Config(void)
   /** Supply configuration update enable
   */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+
   /** Configure the main internal regulator output voltage
   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  /** Macro to configure the PLL clock source
-  */
-  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
@@ -270,6 +271,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
@@ -322,5 +324,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

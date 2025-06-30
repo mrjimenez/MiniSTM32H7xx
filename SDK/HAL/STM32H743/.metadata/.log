@@ -105,3 +105,24 @@ Caused by: java.nio.channels.UnresolvedAddressException
 
 !ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-06-29 22:54:50.388
 !MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-06-30 19:42:36.314
+!MESSAGE Indexed '07-ADC_Test' (40 sources, 102 headers) in 2.39 sec: 10,977 declarations; 97,395 references; 0 unresolved inclusions; 3 syntax errors; 3 unresolved names (0.0028%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-06-30 19:46:33.732
+!MESSAGE Indexed '07-ADC_Test' (40 sources, 102 headers) in 1.41 sec: 10,978 declarations; 97,424 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0018%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-06-30 19:47:44.403
+!MESSAGE Indexed '07-ADC_Test' (40 sources, 102 headers) in 1.24 sec: 10,978 declarations; 97,424 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0018%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-06-30 20:01:20.437
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 7 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-06-30 20:01:20.438
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-06-30 20:01:20.438
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 7 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-06-30 20:01:20.439
+!MESSAGE Existing sessions are:
