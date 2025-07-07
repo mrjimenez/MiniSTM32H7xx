@@ -20,6 +20,7 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
+
 #ifndef __USBD_STORAGE_IF_H__
 #define __USBD_STORAGE_IF_H__
 
@@ -126,4 +127,3 @@ extern USBD_StorageTypeDef USBD_Storage_Interface_fops_FS;
 
 #endif /* __USBD_STORAGE_IF_H__ */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

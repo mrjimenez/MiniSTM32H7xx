@@ -23,7 +23,7 @@
 #define __STM32H7xx_IT_H
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /* Private includes ----------------------------------------------------------*/
@@ -67,5 +67,3 @@ void OTG_FS_IRQHandler(void);
 #endif
 
 #endif /* __STM32H7xx_IT_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
